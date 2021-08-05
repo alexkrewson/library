@@ -1,58 +1,108 @@
-<script>
-
-    // function Book(title, author, pages, read) {
-    //     this.title = title
-    //     this.author = author
-    //     this.pages = pages
-    //     this.read = read
-
-    //     this.info = function () {
-    //         return title + " by " + author + ", " + pages + " pages, " + read
-    //         // return title
-    //     }
-
-    //     // this.info = title + " by " + author + ", " + pages + " pages, " + read
-
-
-    // }
-
-    // const theHobbit = new Book('The Hobbit', 'Tolkein', '9000', 'read')
-    // console.log(theHobbit.info());
-
-    // const theBible = new Book('The Bible', 'God?', '9000', 'not read yet')
-    // console.log(theBible.info());
-
-    // const theDiamondAge = new Book('The Diamond Age', 'Stephenson', '9000', 'read')
-    // console.log(theDiamondAge.info());
-
-
-
-</script>
-
 <!DOCTYPE html>
+
 <html>
 
     <head>
+
+        <title>Library</title>
+
+        <script>
+
+            function Book(title, author, pages, read) {
+                this.title = title
+                this.author = author
+                this.pages = pages
+                this.read = read
+
+                this.info = function () {
+                    return title + " by " + author + ", " + pages + " pages, " + read
+                }
+            }
+
+            book1 = new Book('The Fountainhead', 'Ayn Rand', '456', 'not read yet');
+            book2 = new Book('The Hobbit', 'Tolkein', '9000', 'read');
+            book3 = new Book('The Bible', 'God?', '9000', 'not read yet');
+            // book4 = new Book('The Hobbit', 'Tolkein', '9000', 'read');
+
+            let myLibrary = [book1, book2, book3];
+
+
+
+            // window.onload = function () {
+
+            //     // let words = document.getElementById('myDiv');
+
+
+            //     let d = document.createElement('p')
+
+            //     d.innerHTML = "it's gonna be okay"
+
+            //     // words.innerHTML = print(myLibrary[0])
+
+
+
+            // }
+
+
+            function Print(book) {
+
+
+                var newLine = document.createElement("p");
+                newLine.innerHTML = book.title;
+                document.body.appendChild(newLine);
+
+            }
+
+
+
+
+        </script>
+
     </head>
 
     <body>
-        <div>
-            <h1>Div 1 Heading 1</h1>
-            <p id="p1">Paragraph 1</p>
-            <p>Paragraph 2</p>
-        </div>
-        <div>
-            <p>Div 2 Paragraph 3</p>
-            <span>
-                Text inside span 1.
-                <span style="color: blue;">I am a span within a span.</span>
-            </span>
-        </div>
+
+        <!-- <form class="" action="index.html" method="post">
+            <input type="text" name="array[]" value="" id="thisone"><br>
+            <button type="button" name="button" onclick="click()">
+                Submit
+            </button>
+        </form> -->
+
+        <input type="text" name="array[]" value="" id="thisone"><br>
+
+        <button onclick="Click()">Try it</button>
+
+        <div id="myDiv"></div>
+
     </body>
 
+
+    <script>
+
+
+        let list = document.getElementById('myDiv');
+        list.innerHTML = 'okay'
+
+        myLibrary.forEach(Print)
+
+
+
+
+        function Click() {
+            // console.log(document.getElementById('myDiv').innerHTML);
+            
+            var input = document.getElementById('thisone').value;
+            console.log(input)
+
+
+            var newnewLine = document.createElement("p");
+            newnewLine.innerHTML = input;
+            document.body.appendChild(newnewLine);
+
+        }
+
+
+    </script>
+
 </html>
-
-<script>
-    document.getElementById("p1").innerHTML = "heyo";
-
-</script>
