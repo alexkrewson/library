@@ -19,41 +19,38 @@
                 }
             }
 
-            book1 = new Book('The Fountainhead', 'Ayn Rand', '456', 'not read yet');
+            book1 = new Book('The Fountainhead', 'Ayn Rand', '456', 'not yet read');
             book2 = new Book('The Hobbit', 'Tolkein', '9000', 'read');
-            book3 = new Book('The Bible', 'God?', '9000', 'not read yet');
-            // book4 = new Book('The Hobbit', 'Tolkein', '9000', 'read');
+            book3 = new Book('The Bible', 'God?', '9000', 'not yet read');
 
-            let myLibrary = [book1, book2, book3];
+            
 
+            let myLibrary = [book1, book2];
 
-
-            // window.onload = function () {
-
-            //     // let words = document.getElementById('myDiv');
-
-
-            //     let d = document.createElement('p')
-
-            //     d.innerHTML = "it's gonna be okay"
-
-            //     // words.innerHTML = print(myLibrary[0])
-
-
-
-            // }
 
 
             function Print(book) {
 
-
+                // if (document.getElementsByTagName("p")) {
+                //     var myobj = document.getElementsByTagName("p");
+                //     myobj.remove();
+                // }
                 var newLine = document.createElement("p");
-                newLine.innerHTML = book.title;
+                newLine.innerHTML = book.title + ", by " + book.author + ", " + book.pages + " pages, " + book.read;
                 document.body.appendChild(newLine);
 
             }
 
 
+            function addBookToLibrary(newbook) {
+
+                myLibrary.push(newbook)
+            }
+
+
+           
+
+            
 
 
         </script>
@@ -62,14 +59,15 @@
 
     <body>
 
-        <!-- <form class="" action="index.html" method="post">
-            <input type="text" name="array[]" value="" id="thisone"><br>
-            <button type="button" name="button" onclick="click()">
-                Submit
-            </button>
-        </form> -->
 
-        <input type="text" name="array[]" value="" id="thisone"><br>
+        <input type="text" name="array[]" value="" id="newtitle"><br>
+
+        <input type="text" name="array[]" value="" id="newauthor"><br>
+
+        <input type="text" name="array[]" value="" id="newpages"><br>
+
+        <input type="text" name="array[]" value="" id="newreadstatus"><br>
+
 
         <button onclick="Click()">Try it</button>
 
@@ -81,8 +79,8 @@
     <script>
 
 
-        let list = document.getElementById('myDiv');
-        list.innerHTML = 'okay'
+        // let list = document.getElementById('myDiv');
+        // list.innerHTML = 'okay'
 
         myLibrary.forEach(Print)
 
@@ -90,17 +88,30 @@
 
 
         function Click() {
-            // console.log(document.getElementById('myDiv').innerHTML);
+
+            var title_input = document.getElementById('newtitle').value;
+
+            var author_input = document.getElementById('newauthor').value;
+
+            var pages_input = document.getElementById('newpages').value;
+
+            var readstatus_input = document.getElementById('newreadstatus').value;
+
+
+            newbook = new Book(title_input, author_input, pages_input, readstatus_input)
+
+            addBookToLibrary(newbook)
+
             
-            var input = document.getElementById('thisone').value;
-            console.log(input)
+            // var newnewLine = document.createElement("p");
+            // newnewLine.innerHTML = input;
+            // document.body.appendChild(newnewLine);
 
-
-            var newnewLine = document.createElement("p");
-            newnewLine.innerHTML = input;
-            document.body.appendChild(newnewLine);
-
+            Print(myLibrary[myLibrary.length - 1]);
+            // myLibrary[0](Print);
         }
+
+
 
 
     </script>
