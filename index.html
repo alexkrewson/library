@@ -3,8 +3,8 @@
 <html>
 
     <head>
-
         <title>Library</title>
+        <link rel="stylesheet" href="output.css">
 
         <script>
 
@@ -23,93 +23,225 @@
             book2 = new Book('The Hobbit', 'Tolkein', '9000', 'read');
             book3 = new Book('The Bible', 'God?', '9000', 'not yet read');
 
-            
-
             let myLibrary = [book1, book2];
+
+
+            function removeBook(index) {
+
+                myLibrary.splice(index, 1)
+
+                // remove all library divs
+                var p_list = document.getElementsByClassName("new_line_div");
+
+                for (var i = p_list.length - 1; i >= 0; i--) {
+                    var p = p_list[i];
+                    p.parentNode.removeChild(p);
+
+                }
+
+                myLibrary.forEach(Print)
+
+            }
+
+            function readBook(index) {
+
+
+                if (myLibrary[index].read == 'read' ) {
+                    myLibrary[index].read = "not yet read";
+                } else {
+                    myLibrary[index].read = "read";
+                }
+
+
+
+                // remove all library divs
+                var p_list = document.getElementsByClassName("new_line_div");
+
+                for (var i = p_list.length - 1; i >= 0; i--) {
+                    var p = p_list[i];
+                    p.parentNode.removeChild(p);
+
+                }
+
+                myLibrary.forEach(Print)
+
+            }
 
 
 
             function Print(book) {
 
-                // if (document.getElementsByTagName("p")) {
-                //     var myobj = document.getElementsByTagName("p");
-                //     myobj.remove();
-                // }
-                var newLine = document.createElement("p");
-                newLine.innerHTML = book.title + ", by " + book.author + ", " + book.pages + " pages, " + book.read;
-                document.body.appendChild(newLine);
+                var index = myLibrary.indexOf(book);
+                var newlinediv = document.createElement('div');
+                newlinediv.setAttribute('class', 'new_line_div');
+                newlinediv.setAttribute('index', 1);
+                var newlinepdiv = document.createElement('div');
+                newlinepdiv.setAttribute('class', 'new_line_p_div')
+                var newline = document.createElement("p");
+                newline.innerHTML = book.title + ", by " + book.author + ", " + book.pages + " pages, " + book.read;
+
+                var removebutton = document.createElement('button');
+                removebutton.innerHTML = "Remove Book";
+                removaltext = 'removeBook(' + index + ')';
+                removebutton.setAttribute('onclick', removaltext);
+
+                var readbutton = document.createElement('button');
+                readbutton.innerHTML = "Toggle Read Status";
+                togglereadtext = 'readBook(' + index + ')';
+                readbutton.setAttribute('onclick', togglereadtext);
+
+                newlinediv.appendChild(newlinepdiv);
+                newlinediv.appendChild(removebutton);
+                newlinediv.appendChild(readbutton);
+                newlinepdiv.appendChild(newline);
+                document.body.appendChild(newlinediv);
 
             }
-
 
             function addBookToLibrary(newbook) {
-
                 myLibrary.push(newbook)
+
+
+            }
+
+            function Click() {
+
+                var title_input = document.getElementById('title').value;
+                var author_input = document.getElementById('author').value;
+                var pages_input = document.getElementById('pages').value;
+                var readstatus_input = document.getElementById('read').value;
+
+                newbook = new Book(title_input, author_input, pages_input, readstatus_input)
+
+
+                addBookToLibrary(newbook)
+
+                // remove all library divs
+                var p_list = document.getElementsByClassName("new_line_div");
+
+                for (var i = p_list.length - 1; i >= 0; i--) {
+                    var p = p_list[i];
+                    p.parentNode.removeChild(p);
+
+                }
+
+                myLibrary.forEach(Print)
+
+                var summonbutton = document.getElementById('summon');
+                summonbutton.innerHTML = "Summon New Book Input Fields";
+                summonbutton.setAttribute('onclick', 'Summon()')
+
+
+                var inputcontainer = document.getElementById("input_container");
+
+                while (inputcontainer.firstChild) {
+                    inputcontainer.removeChild(inputcontainer.lastChild);
+                }
+
+            }
+
+            function Summon() {
+
+                var summonbutton = document.getElementById('summon');
+
+                var inputcontainer = document.getElementById('input_container');
+
+                var titlefielddiv = document.createElement('div');
+                titlefielddiv.setAttribute('class', 'fielddiv');
+                var titlefield = document.createElement("input");
+                titlefield.name = 'title';
+                titlefield.id = 'title';
+                var label = document.createElement("label");
+                label.setAttribute('for', 'title');
+                label.innerHTML = "Title";
+                titlefielddiv.appendChild(titlefield);
+                titlefielddiv.appendChild(label)
+
+                var authorfielddiv = document.createElement('div');
+                authorfielddiv.setAttribute('class', 'fielddiv');
+                var authorfield = document.createElement("input");
+                authorfield.name = 'author';
+                authorfield.id = 'author';
+                var label = document.createElement("label");
+                label.setAttribute('for', 'author');
+                label.innerHTML = "Author";
+                authorfielddiv.appendChild(authorfield);
+                authorfielddiv.appendChild(label)
+
+                var pagesfielddiv = document.createElement('div');
+                pagesfielddiv.setAttribute('class', 'fielddiv');
+                var pagesfield = document.createElement("input");
+                pagesfield.name = 'pages';
+                pagesfield.id = 'pages';
+                var label = document.createElement("label");
+                label.setAttribute('for', 'pages');
+                label.innerHTML = "Pages";
+                pagesfielddiv.appendChild(pagesfield);
+                pagesfielddiv.appendChild(label);
+
+                var readfielddiv = document.createElement('div');
+                readfielddiv.setAttribute('class', 'fielddiv');
+                var readfield = document.createElement("input");
+                readfield.name = 'read';
+                readfield.id = 'read';
+                var label = document.createElement("label");
+                label.setAttribute('for', 'read');
+                label.innerHTML = "Read Yet?";
+                readfielddiv.appendChild(readfield);
+                readfielddiv.appendChild(label);
+
+                inputcontainer.appendChild(titlefielddiv);
+                inputcontainer.appendChild(authorfielddiv);
+                inputcontainer.appendChild(pagesfielddiv);
+                inputcontainer.appendChild(readfielddiv);
+
+                // var newbuttoncontainer = document.getElementById('add_button_container');
+                // var newbutton = document.createElement('button')
+                // newbutton.innerHTML = "Add Book to Library";
+                // newbutton.setAttribute('onclick', 'Click()')
+                // newbuttoncontainer.appendChild(newbutton);
+
+
+                summonbutton.innerHTML = "Add Book to Library";
+                // summonbutton.id = ''
+                summonbutton.setAttribute('onclick', 'Click()')
+
+
             }
 
 
-           
 
-            
+
 
 
         </script>
-
     </head>
 
     <body>
 
+        <div id="summon_button_container"></div>
 
-        <input type="text" name="array[]" value="" id="newtitle"><br>
+        <script>
+            var summonbuttoncontainer = document.getElementById('summon_button_container');
+            var summonbutton = document.createElement('button')
+            summonbutton.innerHTML = 'Summon New Book Input Fields';
+            summonbutton.setAttribute('onclick', 'Summon()');
+            summonbutton.id = 'summon'
+            summonbuttoncontainer.appendChild(summonbutton);
+        </script>
 
-        <input type="text" name="array[]" value="" id="newauthor"><br>
+        <div id="input_container"></div>
 
-        <input type="text" name="array[]" value="" id="newpages"><br>
-
-        <input type="text" name="array[]" value="" id="newreadstatus"><br>
-
-
-        <button onclick="Click()">Try it</button>
-
-        <div id="myDiv"></div>
+        <div class="lib"></div>
+        <h1>Book Library</h1>
 
     </body>
 
 
     <script>
 
-
-        // let list = document.getElementById('myDiv');
-        // list.innerHTML = 'okay'
-
         myLibrary.forEach(Print)
 
-
-
-
-        function Click() {
-
-            var title_input = document.getElementById('newtitle').value;
-
-            var author_input = document.getElementById('newauthor').value;
-
-            var pages_input = document.getElementById('newpages').value;
-
-            var readstatus_input = document.getElementById('newreadstatus').value;
-
-
-            newbook = new Book(title_input, author_input, pages_input, readstatus_input)
-
-            addBookToLibrary(newbook)
-
-            
-            // var newnewLine = document.createElement("p");
-            // newnewLine.innerHTML = input;
-            // document.body.appendChild(newnewLine);
-
-            Print(myLibrary[myLibrary.length - 1]);
-            // myLibrary[0](Print);
-        }
 
 
 
